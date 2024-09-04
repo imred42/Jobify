@@ -1,4 +1,4 @@
-import {RouterProvider,createBrowserRouter} from 'react-router-dom'
+import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import {
   HomeLayout,
   Landing,
@@ -10,12 +10,12 @@ import {
   Stats,
   AllJobs,
   Profile,
-  Admin
-} from './pages';
+  Admin,
+} from "./pages";
+import { action as registerAction } from "./pages/Register";
 export const checkDefaultTheme = () => {
-  const isDarkTheme =
-    localStorage.getItem('darkTheme') === 'true'
-  document.body.classList.toggle('dark-theme', isDarkTheme);
+  const isDarkTheme = localStorage.getItem("darkTheme") === "true";
+  document.body.classList.toggle("dark-theme", isDarkTheme);
   return isDarkTheme;
 };
 
@@ -23,42 +23,43 @@ checkDefaultTheme();
 
 const router = createBrowserRouter([
   {
-    path: '/',
+    path: "/",
     element: <HomeLayout />,
-    errorElement: <Error/>,
+    errorElement: <Error />,
     children: [
       {
         index: true,
         element: <Landing />,
       },
       {
-        path: 'register',
+        path: "register",
         element: <Register />,
+        action: registerAction,
       },
       {
-        path: 'login',
+        path: "login",
         element: <Login />,
       },
       {
-        path: 'dashboard',
+        path: "dashboard",
         element: <DashboardLayout />,
         children: [
           {
             index: true,
             element: <AddJob />,
           },
-          { path: 'stats', element: <Stats /> },
+          { path: "stats", element: <Stats /> },
           {
-            path: 'all-jobs',
+            path: "all-jobs",
             element: <AllJobs />,
           },
 
           {
-            path: 'profile',
+            path: "profile",
             element: <Profile />,
           },
           {
-            path: 'admin',
+            path: "admin",
             element: <Admin />,
           },
         ],
@@ -68,7 +69,7 @@ const router = createBrowserRouter([
 ]);
 
 const App = () => {
-  return <RouterProvider router={router}/>
-}
+  return <RouterProvider router={router} />;
+};
 
-export default App
+export default App;
