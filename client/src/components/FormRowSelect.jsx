@@ -1,3 +1,5 @@
+import PropTypes from 'prop-types';
+
 const FormRowSelect = ({ name, labelText, list, defaultValue = "" }) => {
   return (
     <div className="form-row">
@@ -21,4 +23,12 @@ const FormRowSelect = ({ name, labelText, list, defaultValue = "" }) => {
     </div>
   );
 };
+
+FormRowSelect.propTypes = {
+  name: PropTypes.string.isRequired,
+  labelText: PropTypes.string,
+  list: PropTypes.arrayOf(PropTypes.string).isRequired,
+  defaultValue: PropTypes.string
+};
+
 export default FormRowSelect;

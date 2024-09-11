@@ -4,7 +4,7 @@ import Wrapper from "../assets/wrappers/Dashboard";
 import { Navbar, BigSidebar, SmallSidebar } from "../components";
 import { checkDefaultTheme } from "../App";
 import customFetch from "../utils/customFetch";
-import { toast } from 'react-toastify';
+import { toast } from "react-toastify";
 
 export const loader = async () => {
   try {
@@ -12,7 +12,7 @@ export const loader = async () => {
     return data;
   } catch (error) {
     console.error("Failed to load user data:", error);
-    return redirect('/');
+    return redirect("/");
   }
 };
 
@@ -21,17 +21,19 @@ const DashboardContext = createContext();
 const DashboardLayout = ({ isDarkThemeEnabled }) => {
   const data = useLoaderData();
   const navigate = useNavigate();
-  
+
   const [user, setUser] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
-  const [showSidebar, setShowSidebar] = useState(false);
-  const [isDarkTheme, setIsDarkTheme] = useState(isDarkThemeEnabled || checkDefaultTheme());
+  const [showSidebar, setShowSidebar] = useState(true);
+  const [isDarkTheme, setIsDarkTheme] = useState(
+    isDarkThemeEnabled || checkDefaultTheme()
+  );
 
   useEffect(() => {
     if (data && data.user) {
       setUser(data.user);
     } else {
-      navigate('/login'); // Redirect to login if no user data
+      navigate("/login"); // Redirect to login if no user data
     }
     setIsLoading(false);
   }, [data, navigate]);
@@ -52,12 +54,12 @@ const DashboardLayout = ({ isDarkThemeEnabled }) => {
 
   const logoutUser = async () => {
     try {
-      await customFetch.get('/auth/logout');
-      toast.success('Logged out successfully');
-      navigate('/');
+      await customFetch.get("/auth/logout");
+      toast.success("Logged out successfully");
+      navigate("/");
     } catch (error) {
       console.error("Logout failed:", error);
-      toast.error('Logout failed. Please try again.');
+      toast.error("Logout failed. Please try again.");
     }
   };
 
@@ -68,7 +70,7 @@ const DashboardLayout = ({ isDarkThemeEnabled }) => {
   if (!user) {
     return null; // Return null while redirecting
   }
-  
+
   return (
     <DashboardContext.Provider
       value={{
@@ -83,7 +85,7 @@ const DashboardLayout = ({ isDarkThemeEnabled }) => {
       <Wrapper>
         <main className="dashboard">
           <SmallSidebar />
-          <BigSidebar />
+          <BigSidebar showSidebar={showSidebar} />
           <div>
             <Navbar />
             <div className="dashboard-page">

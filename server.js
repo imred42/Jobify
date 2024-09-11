@@ -9,15 +9,22 @@ import mongoose from "mongoose";
 import jobRouter from "./routes/jobRouter.js";
 import authRouter from "./routes/authRouter.js";
 import userRouter from './routes/userRouter.js';
-
+// middleware
 import errorHandlerMiddleware from "./middleware/errorHandlerMiddleware.js";
 import { authenticateUser } from "./middleware/authMiddleware.js";
 
 import cookieParser from "cookie-parser";
-
 const app = express();
 app.use(cookieParser());
 app.use(express.json());
+import cloudinary from 'cloudinary';
+
+// public
+import { dirname } from 'path';
+import { fileURLToPath } from 'url';
+import path from 'path';
+const __dirname = dirname(fileURLToPath(import.meta.url));
+app.use(express.static(path.resolve(__dirname, './public')));
 
 if (process.env.NODE_ENV === "development") {
   app.use(morgan("dev"));
@@ -48,3 +55,10 @@ try {
   console.log(error);
   process.exit(1);
 }
+
+
+cloudinary.config({
+  cloud_name: process.env.CLOUD_NAME,
+  api_key: process.env.CLOUD_API_KEY,
+  api_secret: process.env.CLOUD_API_SECRET,
+});
