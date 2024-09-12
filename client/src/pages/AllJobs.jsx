@@ -9,7 +9,7 @@ export const loader = async ({ request }) => {
     const params = Object.fromEntries([
       ...new URL(request.url).searchParams.entries(),
     ]);
-    const { data } = await customFetch.get("/jobs");
+    const { data } = await customFetch.get("/jobs", { params });
     return {
       data,
       searchValues: { ...params },
@@ -19,7 +19,9 @@ export const loader = async ({ request }) => {
     return error;
   }
 };
+
 const AllJobsContext = createContext();
+
 const AllJobs = () => {
   const { data, searchValues } = useLoaderData();
 
