@@ -20,31 +20,31 @@ const Login = () => {
   const navigate = useNavigate();
   const loginDemoUser = async () => {
     const data = {
-      email: 'test@test.com',
-      password: 'secret123',
+      email: "test@test.com",
+      password: "secret123",
     };
     try {
-      await customFetch.post('/auth/login', data);
-      toast.success('take a test drive');
-      navigate('/dashboard');
+      await customFetch.post("/auth/login", data);
+      toast.success("take a test drive");
+      navigate("/dashboard");
     } catch (error) {
       toast.error(error?.response?.data?.msg);
     }
   };
   return (
     <Wrapper>
-      <Form method='post' className='form'>
+      <Form method="post" className="form">
         <Logo />
         <h4>login</h4>
-        <FormRow type='email' name='email' defaultValue='chenfei@gmail.com' />
-        <FormRow type='password' name='password' defaultValue='secret123' />
+        <FormRow type="email" name="email" />
+        <FormRow type="password" name="password" />
         <SubmitBtn formBtn />
-        <button type='button' className='btn btn-block' onClick={loginDemoUser}>
+        <button type="button" className="btn btn-block" onClick={loginDemoUser}>
           explore the app
         </button>
         <p>
           Not a member yet?
-          <Link to='/register' className='member-btn'>
+          <Link to="/register" className="member-btn">
             Register
           </Link>
         </p>
