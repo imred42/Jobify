@@ -37,6 +37,7 @@
     "nanoid": "^4.0.2",
     "nodemon": "^2.0.22",
     "prop-types": "^15.8.1",
-    "react-toastify": "^9.1.2"
+    "react-toastify": "^9.1.2",
+    "recharts": "^2.5.0"
   }
 }
